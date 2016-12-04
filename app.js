@@ -1,7 +1,9 @@
-var toolbox = require('./src/toolbox');
+var toolbelt = require('./src/toolbelt');
 
-var Json = toolbox.Json,
-    ArrayList = toolbox.ArrayList;
+var Json = toolbelt.Json,
+    ArrayList = toolbelt.ArrayList,
+    StringContent = toolbelt.StringContent,
+    QueryString = toolbelt.QueryString;
 
 var friends = {
     "friends": [{
@@ -31,9 +33,13 @@ friends.forEach(frnd => {
     friend.set('lastname', names[1]);
 });
 
+console.log(friends);
 
 var array = new ArrayList([1, 2, 3, 4]);
 
 array.add(5);
 
 console.log(array.get());
+
+var q = new QueryString('http://localhost?module=querystring&test=1');
+console.log(q.count);

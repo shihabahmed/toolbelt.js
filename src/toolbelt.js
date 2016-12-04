@@ -74,10 +74,7 @@ class StringContent {
 class QueryString {
     constructor(querystring = '') {
         let _qs = querystring.toLowerCase();
-        if (_qs.lastIndexOf('?') >= 0) {
-            _qs = _qs.substring(_qs.lastIndexOf('?') + 1);
-        }
-        this._querystring = _qs;
+        this._querystring = _qs.lastIndexOf('?') >= 0 ? _qs.substring(_qs.lastIndexOf('?') + 1) : '';
     }
 
     get(key) {
@@ -95,7 +92,9 @@ class QueryString {
     }
 
     get count() {
-        return this._querystring !== '' ? this._querystring.split('&').length : 0;
+        let arr = this._querystring.split('&');
+        arr = arr.filter(item => item.length > 0);
+        return arr.length;
     }
 }
 

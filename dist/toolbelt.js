@@ -136,10 +136,7 @@ var QueryString = function () {
         _classCallCheck(this, QueryString);
 
         var _qs = querystring.toLowerCase();
-        if (_qs.lastIndexOf('?') >= 0) {
-            _qs = _qs.substring(_qs.lastIndexOf('?') + 1);
-        }
-        this._querystring = _qs;
+        this._querystring = _qs.lastIndexOf('?') >= 0 ? _qs.substring(_qs.lastIndexOf('?') + 1) : '';
     }
 
     _createClass(QueryString, [{
@@ -160,7 +157,11 @@ var QueryString = function () {
     }, {
         key: "count",
         get: function get() {
-            return this._querystring !== '' ? this._querystring.split('&').length : 0;
+            var arr = this._querystring.split('&');
+            arr = arr.filter(function (item) {
+                return item.length > 0;
+            });
+            return arr.length;
         }
     }]);
 
