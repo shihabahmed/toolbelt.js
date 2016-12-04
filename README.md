@@ -1,3 +1,3 @@
-# gulp-webpack
+# toolbelt.js
 
-Learning es6, babel, webpack with gulp etc...
+Helper classes for handling JSON, Array, string, query string etc.

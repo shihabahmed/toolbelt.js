@@ -1,0 +1,19 @@
+{
+    "name": "toolbox",
+    "version": "1.0.0",
+    "license": "MIT",
+    "devDependencies": {
+        "babel-core": "^6.17.0",
+        "babel-loader": "^6.2.5",
+        "babel-preset-latest": "^6.16.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^6.1.2",
+        "gulp-change": "^1.0.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-rimraf": "^0.2.0",
+        "gulp-util": "^3.0.7",
+        "webpack": "^1.13.3",
+        "webpack-stream": "^3.2.0"
+    },
+    "dependencies": {}
+}
