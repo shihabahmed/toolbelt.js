@@ -129,10 +129,40 @@ var StringContent = function StringContent() {
     this._string = content;
 };
 
-var QueryString = function QueryString() {
-    var querystring = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+var QueryString = function () {
+    function QueryString() {
+        var querystring = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
-    _classCallCheck(this, QueryString);
+        _classCallCheck(this, QueryString);
 
-    this._querystring = querystring;
-};
+        var _qs = querystring.toLowerCase();
+        if (_qs.lastIndexOf('?') >= 0) {
+            _qs = _qs.substring(_qs.lastIndexOf('?') + 1);
+        }
+        this._querystring = _qs;
+    }
+
+    _createClass(QueryString, [{
+        key: "get",
+        value: function get(key) {
+            if (this._querystring !== '') {
+                var _qs = this._querystring.split('&');
+                for (var i = 0; i < _qs.length; i++) {
+                    var _kv = _qs[i].split('=');
+                    if (_kv[0] == key.toLowerCase()) {
+                        return _kv[1];
+                    }
+                }
+            } else {
+                return undefined;
+            }
+        }
+    }, {
+        key: "count",
+        get: function get() {
+            return this._querystring !== '' ? this._querystring.split('&').length : 0;
+        }
+    }]);
+
+    return QueryString;
+}();

@@ -73,6 +73,28 @@ class StringContent {
 
 class QueryString {
     constructor(querystring = '') {
-        this._querystring = querystring;
+        let _qs = querystring.toLowerCase();
+        if (_qs.lastIndexOf('?') >= 0) {
+            _qs = _qs.substring(_qs.lastIndexOf('?') + 1);
+        }
+        this._querystring = _qs;
+    }
+
+    get(key) {
+        if (this._querystring !== '') {
+            let _qs = this._querystring.split('&');
+            for (let i = 0; i < _qs.length; i++) {
+                let _kv = _qs[i].split('=');
+                if (_kv[0] == key.toLowerCase()) {
+                    return _kv[1];
+                }
+            }
+        } else {
+            return undefined;
+        }
+    }
+
+    get count() {
+        return this._querystring !== '' ? this._querystring.split('&').length : 0;
     }
 }
