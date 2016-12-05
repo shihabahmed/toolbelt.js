@@ -33,9 +33,9 @@ var Json = function () {
     }, {
         key: "values",
         value: function values() {
-            var json = this._json;
-            var keys = this.keys(json);
-            var values = keys.map(function (key) {
+            var json = this._json,
+                keys = this.keys(json),
+                values = keys.map(function (key) {
                 return json[key];
             });
             return values;
@@ -92,16 +92,18 @@ var ArrayList = function () {
                 items[_key2] = arguments[_key2];
             }
 
-            this._array.concat(items);
+            this._array = this._array.concat(items);
         }
     }, {
         key: "addAt",
         value: function addAt(index) {
+            var _array;
+
             for (var _len3 = arguments.length, items = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
                 items[_key3 - 1] = arguments[_key3];
             }
 
-            this._array.splice(index, 0, items);
+            (_array = this._array).splice.apply(_array, [index, 0].concat(items));
         }
     }, {
         key: "remove",
@@ -121,13 +123,68 @@ var ArrayList = function () {
     return ArrayList;
 }();
 
-var StringContent = function StringContent() {
-    var content = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+var StringContent = function () {
+    function StringContent() {
+        var content = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
-    _classCallCheck(this, StringContent);
+        _classCallCheck(this, StringContent);
 
-    this._string = content;
-};
+        this._string = content;
+    }
+
+    _createClass(StringContent, [{
+        key: "startsWith",
+        value: function startsWith(pattern, isCaseSensitive) {
+            var str = this._string;
+            if (!isCaseSensitive) {
+                str = str.toLowerCase();
+                pattern = pattern.toLowerCase();
+            }
+            return str.startsWith(pattern);
+        }
+    }, {
+        key: "endsWith",
+        value: function endsWith(pattern, isCaseSensitive) {
+            var str = this._string;
+            if (!isCaseSensitive) {
+                str = str.toLowerCase();
+                pattern = pattern.toLowerCase();
+            }
+            return str.endsWith(pattern);
+        }
+    }, {
+        key: "contains",
+        value: function contains(pattern, isCaseSensitive) {
+            var str = this._string;
+            if (!isCaseSensitive) {
+                str = str.toLowerCase();
+                pattern = pattern.toLowerCase();
+            }
+
+            return str.search(pattern) >= 0;
+        }
+    }, {
+        key: "replaceAll",
+        value: function replaceAll(oldString, newString, isCaseSensitive) {
+            var regExp = new RegExp(oldString, isCaseSensitive ? 'g' : 'gi');
+            return this._string.replace(regExp, newString);
+        }
+    }], [{
+        key: "format",
+        value: function format(content) {
+            for (var _len5 = arguments.length, params = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+                params[_key5 - 1] = arguments[_key5];
+            }
+
+            for (var i = 0, length = params.length; i < length; i++) {
+                content = content.replace("{" + i + "}", params[i]);
+            }
+            return content;
+        }
+    }]);
+
+    return StringContent;
+}();
 
 var QueryString = function () {
     function QueryString() {
@@ -145,15 +202,30 @@ var QueryString = function () {
             if (this._querystring !== '') {
                 var _qs = this._querystring.split('&');
                 for (var i = 0; i < _qs.length; i++) {
-                    var _kv = _qs[i].split('=');
-                    if (_kv[0] == key.toLowerCase()) {
-                        return _kv[1];
+                    var pair = _qs[i].split('=');
+                    if (pair[0] == key.toLowerCase()) {
+                        return pair[1];
                     }
                 }
-            } else {
-                return undefined;
             }
+            return undefined;
         }
+
+        // toJson() {
+        //     if (this._querystring !== '') {
+        //         let json = {},
+        //             pair = [],
+        //             _qs = this._querystring.split('&');
+        //         for (var i = 0; i < _qs.length; i++) {
+        //             pair = _qs[i].split('=');
+        //             json[pair[0]] = pair[1];
+        //         }
+
+        //         return json;
+        //     }
+        //     return undefined;
+        // }
+
     }, {
         key: "count",
         get: function get() {

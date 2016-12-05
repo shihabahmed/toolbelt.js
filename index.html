@@ -1,0 +1,39 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script src="/dist/es6/toolbelt.js"></script>
+    <script>
+        var friends = {
+            "friends": [{
+                "id": 0,
+                "name": "Hatfield Owen"
+            }, {
+                "id": 1,
+                "name": "Marquita Hopper"
+            }, {
+                "id": 2,
+                "name": "Riggs Rice"
+            }]
+        };
+
+        var json = new Json(friends);
+        var friends = json.get().friends;
+
+        friends.forEach(frnd => {
+            let friend = new Json(frnd);
+            let names = friend.get('name').split(' ');
+            friend.set('firstname', names[0]);
+            friend.set('lastname', names[1]);
+        });
+
+        var array = new ArrayList([1, 2, 3, 4]);
+        array.add(5);
+
+        var q = new QueryString('http://localhost?module=querystring&test=1&a=1&b[0]=b1&b[1]=b2');
+    </script>
+</body>
+
+</html>
