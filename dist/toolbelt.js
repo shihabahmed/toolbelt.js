@@ -210,22 +210,22 @@ var QueryString = function () {
             }
             return undefined;
         }
+    }, {
+        key: "toJson",
+        value: function toJson() {
+            if (this._querystring !== '') {
+                var json = {},
+                    pair = [],
+                    _qs = this._querystring.split('&');
+                for (var i = 0; i < _qs.length; i++) {
+                    pair = _qs[i].split('=');
+                    json[pair[0]] = pair[1];
+                }
 
-        // toJson() {
-        //     if (this._querystring !== '') {
-        //         let json = {},
-        //             pair = [],
-        //             _qs = this._querystring.split('&');
-        //         for (var i = 0; i < _qs.length; i++) {
-        //             pair = _qs[i].split('=');
-        //             json[pair[0]] = pair[1];
-        //         }
-
-        //         return json;
-        //     }
-        //     return undefined;
-        // }
-
+                return json;
+            }
+            return undefined;
+        }
     }, {
         key: "count",
         get: function get() {
