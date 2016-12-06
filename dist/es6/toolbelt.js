@@ -1,4 +1,4 @@
-"use strict";
+
 
 class Json {
     constructor(json = {}) {
@@ -41,9 +41,11 @@ class Json {
     }
 }
 
-class ArrayList {
-    constructor(array = []) {
-        this._array = array;
+class ArrayList extends Array {
+    constructor(...array) {
+        super(array);
+        this._array = [];
+        this._array = this._array.concat(array);
     }
 
     get(index) {

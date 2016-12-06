@@ -42,8 +42,9 @@ class Json {
 }
 
 class ArrayList {
-    constructor(array = []) {
-        this._array = array;
+    constructor(...array) {
+        this._array = [];
+        this._array = this._array.concat(array);
     }
 
     get(index) {
@@ -151,5 +152,3 @@ class QueryString {
         return undefined;
     }
 }
-
-module.exports = { Json, ArrayList, StringContent, QueryString };

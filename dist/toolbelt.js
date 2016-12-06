@@ -2,6 +2,10 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Json = function () {
@@ -71,13 +75,21 @@ var Json = function () {
     return Json;
 }();
 
-var ArrayList = function () {
-    function ArrayList() {
-        var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+var ArrayList = function (_Array) {
+    _inherits(ArrayList, _Array);
 
+    function ArrayList() {
         _classCallCheck(this, ArrayList);
 
-        this._array = array;
+        for (var _len2 = arguments.length, array = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+            array[_key2] = arguments[_key2];
+        }
+
+        var _this2 = _possibleConstructorReturn(this, (ArrayList.__proto__ || Object.getPrototypeOf(ArrayList)).call(this, array));
+
+        _this2._array = [];
+        _this2._array = _this2._array.concat(array);
+        return _this2;
     }
 
     _createClass(ArrayList, [{
@@ -88,8 +100,8 @@ var ArrayList = function () {
     }, {
         key: "add",
         value: function add() {
-            for (var _len2 = arguments.length, items = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-                items[_key2] = arguments[_key2];
+            for (var _len3 = arguments.length, items = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+                items[_key3] = arguments[_key3];
             }
 
             this._array = this._array.concat(items);
@@ -99,8 +111,8 @@ var ArrayList = function () {
         value: function addAt(index) {
             var _array;
 
-            for (var _len3 = arguments.length, items = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-                items[_key3 - 1] = arguments[_key3];
+            for (var _len4 = arguments.length, items = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+                items[_key4 - 1] = arguments[_key4];
             }
 
             (_array = this._array).splice.apply(_array, [index, 0].concat(items));
@@ -108,20 +120,20 @@ var ArrayList = function () {
     }, {
         key: "remove",
         value: function remove() {
-            var _this2 = this;
+            var _this3 = this;
 
-            for (var _len4 = arguments.length, items = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-                items[_key4] = arguments[_key4];
+            for (var _len5 = arguments.length, items = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+                items[_key5] = arguments[_key5];
             }
 
             items.forEach(function (item) {
-                _this2._array.splice(_this2._array.indexOf(item), 1);
+                _this3._array.splice(_this3._array.indexOf(item), 1);
             });
         }
     }]);
 
     return ArrayList;
-}();
+}(Array);
 
 var StringContent = function () {
     function StringContent() {
@@ -172,8 +184,8 @@ var StringContent = function () {
     }], [{
         key: "format",
         value: function format(content) {
-            for (var _len5 = arguments.length, params = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-                params[_key5 - 1] = arguments[_key5];
+            for (var _len6 = arguments.length, params = Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
+                params[_key6 - 1] = arguments[_key6];
             }
 
             for (var i = 0, length = params.length; i < length; i++) {
