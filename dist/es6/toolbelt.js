@@ -41,9 +41,8 @@ class Json {
     }
 }
 
-class ArrayList extends Array {
+class ArrayList {
     constructor(...array) {
-        super(array);
         this._array = [];
         this._array = this._array.concat(array);
     }
